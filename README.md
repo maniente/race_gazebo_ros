@@ -24,4 +24,4 @@ a Ros node send on a topic a signal to start the race, this set also random velo
 * Ros node to start the race
   * 
 * Ros node to wait the end of the race
-  * 
+* create a launch file
