@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'RaceGazeboRos'
+package_name = 'race_gazebo_ros'
 
 setup(
     name=package_name,
