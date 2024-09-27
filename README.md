@@ -1,4 +1,4 @@
-# RaceGazeboRos
+# race_gazebo_ros
 This project will be the Exercise 2 of the course Robotic Programming
 
 ## Requests
