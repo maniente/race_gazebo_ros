@@ -19,7 +19,8 @@ setup(
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-        ],
+            'console_scripts': [
+                    'race_director = race_gazebo_ros.race_director:main',
+            ],
     },
 )
