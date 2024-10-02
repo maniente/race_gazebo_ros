@@ -56,16 +56,11 @@ class RaceDirector(Node):
         if not self.flag_photofinish and self.position >= 1:
             self.flag_photofinish = True
 
-            # Convert ROS Image message to OpenCV image
-            current_frame = self.br.imgmsg_to_cv2(image,"bgr8")
-            
             # convert ros image to opencv image in mat format
             current_frame = cv2.cvtColor(self.br.imgmsg_to_cv2(image), cv2.COLOR_BGR2RGB)
 
             # Save the image
             cv2.imwrite("photo_finish.jpg", current_frame)
-            
-            #cv2.waitKey(0)
 
     def start_timer(self,msg):
         if(msg.data == 83 and not self.flag_start):
