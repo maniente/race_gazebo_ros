@@ -3,6 +3,7 @@ from rclpy.node import Node
 
 from std_msgs.msg import Bool
 from std_msgs.msg import Int32
+from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
 import cv2 # OpenCV library
@@ -33,6 +34,10 @@ class RaceDirector(Node):
             self.start_timer,
             10)
         
+        self.end_race_publishers = []
+        for i in range(3):
+            self.end_race_publishers.append(self.create_publisher(Twist, f'/model/vehicle_{i}/cmd_vel', 10)) 
+
         self.time_zero = datetime.now()
         self.flag_start = False
         
@@ -44,12 +49,19 @@ class RaceDirector(Node):
         self.flag_arrived = [False,False,False]
 
     def add_to_ranking(self,msg,id):
-        #self.get_logger().info(f'Received: {id}, {msg}')
         if not self.flag_arrived[id] and msg:
             self.flag_arrived[id]= True
             self.position += 1
             lap_time = datetime.now()-self.time_zero
             self.get_logger().info("{}: vehicle{} lap time : {}".format(self.position,id,lap_time))
+
+            # Stop the race when all vehicles have arrived
+            if self.position >= 3:
+                self.get_logger().info("All vehicles have arrived!")
+                for end_race_publisher in self.end_race_publishers:
+                    twist = Twist()
+                    twist.linear.x = 0.0
+                    end_race_publisher.publish(twist)
 
     def show_image(self, image):
         
