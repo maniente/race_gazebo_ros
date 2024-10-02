@@ -77,7 +77,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         gz_sim,
-        DeclareLaunchArgument('rqt', default_value='true',
+        DeclareLaunchArgument('rqt', default_value='false',
                               description='Open RQt.'),
         bridges_config,
         *bridges,
