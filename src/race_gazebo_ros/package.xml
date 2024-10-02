@@ -2,9 +2,11 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>race_gazebo_ros</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="marcomusto@tutanota.com">maniente</maintainer>
+  <version>0.0.1</version>
+  <description>Race simulator: Press 's' to start. A picture will be taken when the first car
+    reaches the line.</description>
+  <maintainer email="marco.musto@tuni.fi">Marco Musto</maintainer>
+  <maintainer email="guilhem.richaud@tuni.fi">Guilhem RICHAUD</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>rclpy</exec_depend>
@@ -12,7 +14,6 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>cv2</exec_depend>
-
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

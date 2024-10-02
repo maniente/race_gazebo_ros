@@ -1,0 +1,11 @@
+---
+- ros_topic_name: "/keyboard/keypress"
+  gz_topic_name: "/keyboard/keypress"
+  ros_type_name: "std_msgs/msg/Int32"
+  gz_type_name: "gz.msgs.Int32"
+  direction: GZ_TO_ROS # GZ_TO_ROS, ROS_TO_GZ or BIDIRECTIONAL
+- ros_topic_name: "/world/Myworld/model/realsense_d435/link/link/sensor/realsense_d435/image"
+  gz_topic_name: "/world/Myworld/model/realsense_d435/link/link/sensor/realsense_d435/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "ignition.msgs.Image"
+  direction: GZ_TO_ROS # GZ_TO_ROS, ROS_TO_GZ or BIDIRECTIONAL

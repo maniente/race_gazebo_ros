@@ -15,7 +15,7 @@ class RaceDirector(Node):
         for id in range(3):
             self.create_subscription(
                     Bool,
-                    f'/lane{id+1}/touched',
+                    f'/lane{id}/touched',
                     lambda msg: self.add_to_ranking(msg, id),
                     10)
         
@@ -33,10 +33,11 @@ class RaceDirector(Node):
         self.flag_arrived = [False,False,False]
 
     def add_to_ranking(self,msg,id):
+        self.get_logger().info(f'Received: {id}, {msg}')
         if not self.flag_arrived[id] and msg:
-            self.flag_arrived [id]= True
+            self.flag_arrived[id]= True
             self.position += 1
-            print("{}: vehicle{}".format(self.position,id))
+            self.get_logger().info("{}: vehicle{}".format(self.position,id))
 
     def show_image(self, image):
         
