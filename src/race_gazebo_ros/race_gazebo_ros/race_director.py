@@ -2,9 +2,11 @@ import rclpy
 from rclpy.node import Node
 
 from std_msgs.msg import Bool
+from std_msgs.msg import Int32
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
 import cv2 # OpenCV library
+from datetime import datetime
 
 
 class RaceDirector(Node):
@@ -25,6 +27,15 @@ class RaceDirector(Node):
                     self.show_image,
                     10)
         
+        self.create_subscription(
+            Int32,
+            '/keyboard/keypress',
+            self.start_timer,
+            10)
+        
+        self.time_zero = datetime.now()
+        self.flag_start = False
+        
         # Used to convert between ROS and OpenCV images
         self.br = CvBridge()
 
@@ -33,15 +44,16 @@ class RaceDirector(Node):
         self.flag_arrived = [False,False,False]
 
     def add_to_ranking(self,msg,id):
-        self.get_logger().info(f'Received: {id}, {msg}')
+        #self.get_logger().info(f'Received: {id}, {msg}')
         if not self.flag_arrived[id] and msg:
             self.flag_arrived[id]= True
             self.position += 1
-            self.get_logger().info("{}: vehicle{}".format(self.position,id))
+            lap_time = datetime.now()-self.time_zero
+            self.get_logger().info("{}: vehicle{} lap time : {}".format(self.position,id,lap_time))
 
     def show_image(self, image):
         
-        if not self.flag_photofinish and self.position == 1:
+        if not self.flag_photofinish and self.position >= 1:
             self.flag_photofinish = True
 
             # Display the message on the console
@@ -52,7 +64,15 @@ class RaceDirector(Node):
             # Display image
             cv2.imshow("camera", current_frame)
             
-            cv2.waitKey(0)
+            #cv2.waitKey(0)
+
+    def start_timer(self,msg):
+        if(msg.data == 83 and not self.flag_start):
+            self.flag_start = True
+            self.time_zero = datetime.now()
+
+
+        
 
 def main(args=None):
     rclpy.init(args=args)

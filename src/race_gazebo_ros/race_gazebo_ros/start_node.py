@@ -40,7 +40,7 @@ class StartNode(Node):
         if(msg.data == 83):
             for start_publisher in self.start_publishers:
                 twist = Twist()
-                twist.linear.x = 8.0 + (1.0 - 2.0 * random.random())
+                twist.linear.x = 5.0 + (1.0 - 2.0 * random.random())
                 start_publisher.publish(twist)
 
 

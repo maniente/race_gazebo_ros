@@ -64,13 +64,15 @@ def generate_launch_description():
     start_node = Node(
         package='race_gazebo_ros',
         executable='start_node',
-        output='screen'
+        output='screen',
+        emulate_tty = True,
     )
 
     race_director = Node(
         package='race_gazebo_ros',
         executable='race_director',
-        output='screen'
+        output='screen',
+        emulate_tty = True,
     )
 
     return LaunchDescription([
