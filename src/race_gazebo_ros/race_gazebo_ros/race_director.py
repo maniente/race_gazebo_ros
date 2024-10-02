@@ -55,13 +55,12 @@ class RaceDirector(Node):
             lap_time = datetime.now()-self.time_zero
             self.get_logger().info("{}: vehicle{} lap time : {}".format(self.position,id,lap_time))
 
-            # Stop the race when all vehicles have arrived
+            twist = Twist()
+            twist.linear.x = 0.0
+            self.end_race_publishers[id].publish(twist)
+
             if self.position >= 3:
                 self.get_logger().info("All vehicles have arrived!")
-                for end_race_publisher in self.end_race_publishers:
-                    twist = Twist()
-                    twist.linear.x = 0.0
-                    end_race_publisher.publish(twist)
 
     def show_image(self, image):
         
