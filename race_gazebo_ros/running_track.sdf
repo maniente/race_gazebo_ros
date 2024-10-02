@@ -66,7 +66,7 @@
             </link>
         </model>
 
-        <model name='vehicle_red' canonical_link='chassis'>
+        <model name='vehicle_1' canonical_link='chassis'>
             <pose relative_to='world'>-10 0 0 0 0 0</pose>
             <link name='chassis'>
                 <pose relative_to='__model__'>0.5 0 0.4 0 0 0</pose>
@@ -262,7 +262,7 @@
             </plugin>
         </model>
 
-        <model name='vehicle_yellow' canonical_link='chassis'>
+        <model name='vehicle_2' canonical_link='chassis'>
             <pose relative_to='world'>-10 3 0 0 0 0</pose>
             <link name='chassis'>
                 <pose relative_to='__model__'>0.5 0 0.4 0 0 0</pose>
@@ -457,7 +457,7 @@
             </plugin>
         </model>
 
-        <model name='vehicle_orange' canonical_link='chassis'>
+        <model name='vehicle_3' canonical_link='chassis'>
             <pose relative_to='world'>-10 -3 0 0 0 0</pose>
             <link name='chassis'>
                 <pose relative_to='__model__'>0.5 0 0.4 0 0 0</pose>
