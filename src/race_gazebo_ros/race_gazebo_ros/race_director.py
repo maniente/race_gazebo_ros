@@ -16,7 +16,7 @@ class RaceDirector(Node):
             self.create_subscription(
                     Bool,
                     f'/lane{id}/touched',
-                    lambda msg: self.add_to_ranking(msg, id),
+                    lambda msg, id=id: self.add_to_ranking(msg, id),
                     10)
         
         self.create_subscription(
