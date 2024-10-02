@@ -49,16 +49,19 @@ class RaceDirector(Node):
         self.flag_arrived = [False,False,False]
 
     def add_to_ranking(self,msg,id):
+        # If the vehicle has not arrived yet, add it to the ranking
         if not self.flag_arrived[id] and msg:
             self.flag_arrived[id]= True
             self.position += 1
             lap_time = datetime.now()-self.time_zero
             self.get_logger().info("{}: vehicle{} lap time : {}".format(self.position,id,lap_time))
 
+            # Stop the arrived vehicle
             twist = Twist()
             twist.linear.x = 0.0
             self.end_race_publishers[id].publish(twist)
 
+            # If all vehicles have arrived print the final message
             if self.position >= 3:
                 self.get_logger().info("All vehicles have arrived!")
 
