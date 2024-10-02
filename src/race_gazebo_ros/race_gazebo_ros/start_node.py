@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import random
 import rclpy 
 from rclpy.node import Node
 
@@ -39,7 +40,7 @@ class StartNode(Node):
         if(msg.data == 83):
             for start_publisher in self.start_publishers:
                 twist = Twist()
-                twist.linear.x = 8.0
+                twist.linear.x = 8.0 + (1.0 - 2.0 * random.random())
                 start_publisher.publish(twist)
 
 
